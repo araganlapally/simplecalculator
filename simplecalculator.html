@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Simple Calculator</title>
+    <style type="text/css">
+        * img {
+            width: 50px;
+            height: 50px;
+        }
+        .container {
+            padding-left: 700px;
+            padding-top: 50px;-
+        }
+        textarea {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Simple Calculator</h2>
+    <textarea id="display" rows="2" cols="18" readonly></textarea>
+    <a href="#" id="clear"><img src="clear.png" alt="Clear" onclick="cleardisplay()"></a>
+
+    <div class="images2">
+        <a href="#" class="num" data-value="7"><img src="seven.png" alt="7" onclick="appendnumber('7')"></a>
+        <a href="#" class="num" data-value="8"><img src="eight.png" alt="8" onclick="appendnumber('8')" ></a>
+        <a href="#" class="num" data-value="9"><img src="nine.png" alt="9" onclick="appendnumber('9')"></a>
+        <a href="#" class="op" data-value="+"><img src="addition.png" alt="+" onclick="setoperation('+')"></a>
+    </div>
+    <div class="images2">
+        <a href="#" class="num" data-value="4"><img src="four.png" alt="4" onclick="appendnumber('4')"></a>
+        <a href="#" class="num" data-value="5"><img src="five.png" alt="5" onclick="appendnumber('5')"></a>
+        <a href="#" class="num" data-value="6"><img src="six.png" alt="6" onclick="appendnumber('6')"></a>
+        <a href="#" class="op" data-value="-"><img src="subtraction.png" alt="-" onclick="setoperation('-')"></a>
+    </div>
+    <div class="images2">
+        <a href="#" class="num" data-value="1"><img src="one.png" alt="1" onclick="appendnumber('1')"></a>
+        <a href="#" class="num" data-value="2"><img src="two.png" alt="2" onclick="appendnumber('2')"></a>
+        <a href="#" class="num" data-value="3"><img src="three.png" alt="3" onclick="appendnumber('3')"></a>
+        <a href="#" class="op" data-value="*"><img src="multiplication.png" alt="*" onclick="setoperation('*')"></a>
+    </div>
+    <div class="images2">
+        <a href="#" class="num" data-value="0"><img src="zero.png" alt="0" onclick="appendnumber('0')"></a>
+        <a href="#" class="num" data-value="."><img src="dot.png" alt="." onclick="appendnumber('.')"></a>
+        <a href="#" id="equals"><img src="equalsto.png" alt="=" onclick="calculate()"></a>
+        <a href="#" class="op" data-value="/"><img src="division.png" alt="/" onclick="setoperation('/')"></a>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+   let firstnumber='';
+   let secondnumber='';
+   let operator='';
+   function cleardisplay() {
+            firstnumber = '';
+            secondnumber = '';
+            operator = '';
+            display.value = '';
+        }
+   function appendnumber(number) {
+            if (operator === '') {
+                firstnumber += number;  
+                display.value = firstnumber;
+            } else {
+                secondnumber += number;
+                display.value = secondnumber;
+            }
+        }
+        function setoperation(op) {
+            if (firstnumber !== '') {
+                operator = op;
+                display.value = '';
+            }
+        }
+        
+        function calculate() {
+            if (firstnumber !== '' && secondnumber !== '' && operator !== '') {
+                let result;
+                switch (operator) {
+                    case '+':
+                        result = parseFloat(firstnumber) + parseFloat(secondnumber);
+                        break;
+                    case '-':
+                        result = parseFloat(firstnumber) - parseFloat(secondnumber);
+                        break;
+                    case '*':
+                        result = parseFloat(firstnumber) * parseFloat(secondnumber);
+                        break;
+                    case '/':
+                        result = parseFloat(firstnumber) / parseFloat(secondnumber);
+                        break;
+                }
+                display.value = result;
+                firstnumber = result;
+                secondnumber = '';
+                operator = '';
+
+            }
+        }
+</script>
+
+</body>
+</html>
